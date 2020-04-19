@@ -15,7 +15,7 @@
   /* 在style里面引用资源 用  @import url（.xx/xx/xx）*/
   @import url("~assets/css/base.css");
   #tab-bar{
-    /* width: 100%; */
+ 
     display:flex;
     background-color: #f2f2f2;
     position: fixed;

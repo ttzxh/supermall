@@ -20,9 +20,10 @@
 		}
 	},
 	methods:{
-		changeColor(index){
+		changeColor(index){ 	
 			// this.flag=!this.flag
-			this.currentindex=index
+			this.currentindex=index;
+			this.$emit('tabClick',index)
 		}
 	},
 	data(){
@@ -41,6 +42,7 @@
 		display: flex;
 		font-size: 16px;
 		background-color: #FFFFFF;
+		z-index: 99;
 	}
 	.tab-control-item{
 	  flex: 1;
