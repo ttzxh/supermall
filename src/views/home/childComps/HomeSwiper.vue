@@ -2,7 +2,7 @@
 	<swiper>
 		<swiper-item v-for="item in banners">
 		  <a :href="item.link">
-				<img :src="item.image" alt="">
+				<img :src="item.image" alt="" @load="imageLoad">
 			</a>
 			
 		</swiper-item>
@@ -23,10 +23,26 @@
 				}
 			}
 		},
+		data(){
+			return{
+				isLoad:false
+			}
+		},
 		components:{
 			Swiper,
 			SwiperItem
 		},	
+		methods:{
+			// 让轮播图的图片加载玩之后再进行计算tabControl的offsetTop
+			imageLoad(){
+				// console.log('333')
+				if(!this.isLoad){
+					this.$emit('swiperImageLoad')
+					this.isLoad=!this.isLoad
+				}
+				
+			}
+		}
 		
 		
 	}

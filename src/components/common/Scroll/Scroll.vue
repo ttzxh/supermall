@@ -13,9 +13,15 @@
 	export default{
 		name:"scroll",
 		props:{
-			probeType:Number,
+			probeType:{
+		  Type:Number,
 			default(){
 				return 0
+			}
+			},
+			pullUpLoad:{
+				type:Boolean,
+				default:false
 			}
 		},
 		data(){
@@ -30,7 +36,7 @@
 		mounted() {
 			this.scroll=new BScroll(this.$refs.wrapper,{
 				probeType:this.probeType,
-				pullUpLoad:true,
+				pullUpLoad:this.pullUpLoad,
 				// button这种东西无论是false还是true都可以店家但是div这些东西就需要click：true
 				click:true
 			}),
@@ -40,12 +46,15 @@
 				this.$emit('scroll',position)
 			}),
 			this.scroll.on('pullingUp',()=>{
-				console.log('正在向上la')
+				this.$emit('pullingUp')
 			})
 		},
 		methods:{
 			scrollTo(x,y,time=300){
 				this.scroll.scrollTo(x,y,time)
+			},
+			finishPullUp(){
+				this.scroll.finishPullUp()
 			}
 		}
 	}
