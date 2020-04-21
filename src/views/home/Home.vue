@@ -142,7 +142,8 @@
 			isShowBackTop:false,
 			tabOffsetTop:0,
 			isTabFix:false,
-			isTabShow:false
+			isTabShow:false,
+			SaveY:0
 		}
 	},
 	created() {
@@ -169,6 +170,23 @@
 		// 	// console.log(this.$refs.tabControl.$el.offsetTop)
 		// },500)
         
+	},
+	destroyed() {
+		console.log('homeDestroy')
+		
+	},
+	//在页面存活的时候进入这个页面
+	activated() {
+		console.log('active')
+		console.log(this.SaveY)
+		this.$refs.scroll.scrollTo(0,this.SaveY)
+		this.$refs.scroll.scroll.refresh()
+	},
+	//在页面存活的时候离开这个页面
+	deactivated() {
+		console.log('deactived')
+		this.SaveY=this.$refs.scroll.scroll.y;
+		console.log(this.SaveY)
 	},
 	methods:{
 		//事件监听相关方法

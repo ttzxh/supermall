@@ -1,5 +1,5 @@
 <template>
-	<div class="goodsItem">
+	<div class="goodsItem" @click="itemCli">
 		<img :src="goodsItem.show.img" alt="">
 		<div class="limit">
 			<p>{{goodsItem.title}}</p>
@@ -18,6 +18,18 @@
 				default(){
 					return {}
 			}
+		}
+	},
+	methods:{
+		itemCli(){
+			// console.log('跳转')
+			this.$router.push('/detail/'+this.goodsItem.iid)
+			// this.$router.push({
+			// 	path:'/detail',
+			// 	query:{
+					
+			// 	}
+			// })
 		}
 	}
 	}

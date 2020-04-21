@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper" ref="wrapper">
+	<div ref="wrapper">
 		<div class="content"><slot></slot></div>
 		<!-- <position :position="position" ></position> -->
 		<!-- <back-top></back-top> -->
