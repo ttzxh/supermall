@@ -23,3 +23,25 @@ export class Goods{
 		this.realPrice=itemInfo.LowNowPrice
 	}
 }
+
+export class Shop{
+	constructor(shopInfo){
+		this.logo=shopInfo.shopLogo;
+		this.name=shopInfo.name;
+		this.fans=shopInfo.cFans;
+		this.sells=shopInfo.cSells;
+		this.score=shopInfo.score;
+		this.goodsCount=shopInfo.cGoods;
+		this.Url=shopInfo.allGoodsUrl;
+	}
+}
+
+
+export class GoodsParam{
+	constructor(info,rule) {
+	    //image可能没有值（某些商品有值 有些商品没有值）
+			this.image=info.image?info.images[0]:'';
+			this.info=info.set;
+			this.size=rule.tables;
+	}
+}

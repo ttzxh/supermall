@@ -14,7 +14,7 @@
 		<div class="boundent">
 			<span v-for="(items,index) in goods.services">
 				<img :src="goods.services[index].icon" alt="">
-				<span>{{goods.services[index].name}}</span>
+				<span class="goodstrs">{{goods.services[index].name}}</span>
 			</span>
 			
 		</div>
@@ -56,6 +56,7 @@
 		font-size: 22px;
 	}
 	.oldprice{
+		color: #666666;
 		text-decoration: line-through;
 	}
 	.decride{
@@ -67,10 +68,16 @@
 	.boundent{
 		display: flex;
 		margin-top: 20px;
-		justify-content: space-between;
+		padding-bottom: 20px;
+		justify-content:space-around;
+		border-bottom: 5px solid #e6e6e6;
+		font-size: 11px
 	}
 	.boundent img{
 		width: 15px;
+	}
+	.goodstrs{
+		flex: 1;
 	}
 	
 	

@@ -20,10 +20,11 @@
     background-color: #f2f2f2;
     position: fixed;
     bottom: 0;
+		
    right: 0;
     left: 0;
     box-shadow: 0px -2px  10px 0 rgba(0,0,0,.3);
-		z-index: 999999999;
+		z-index: 99;
   }
 
 </style>

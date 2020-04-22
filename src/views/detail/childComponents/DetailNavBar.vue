@@ -46,6 +46,12 @@
 
 <style>
 	.change3D{
+		/* position: fixed;
+		z-index: 99;
+		background-color: honeydew;
+		left: 0;
+		right: 0;
+		top: 0; */
 		perspective: 500px;
 	}
 	.DetailNavBar{
