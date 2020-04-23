@@ -7,6 +7,7 @@
 			<detail-shop-info :shop="shop"></detail-shop-info>
 			<detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
 			<detail-params-info :param-info="goodsParamInfo"></detail-params-info>
+			<detail-comment :comment="comment"></detail-comment>
 		</scroll>
 	</div>
 </template>
@@ -19,8 +20,9 @@
 	import Scroll from '../../components/common/Scroll/Scroll.vue'
 	import detailGoodsInfo from './childComponents/detailGoodsInfo.vue'
 	import DetailParamsInfo from './childComponents/DetailParamInfo.vue'
+	import DetailComment from './childComponents/DetailComment.vue'
 	
-	import {getDetail,Goods,Shop,GoodsParam} from '../../network/detail.js'
+	import {getDetail,Goods,Shop,GoodsParam,Comment} from '../../network/detail.js'
 
 	export default{
 		name:"detail",
@@ -31,7 +33,8 @@
 			DetailShopInfo,
 			Scroll,
 			detailGoodsInfo,
-			DetailParamsInfo
+			DetailParamsInfo,
+			DetailComment
 		},
 		data(){
 			return{
@@ -41,7 +44,8 @@
 				goods:{},
 				shop:{},
 				detailInfo:{},
-				goodsParamInfo:{}
+				goodsParamInfo:{},
+				comment:{}
 			}
 		},
 		created() {
@@ -58,6 +62,8 @@
 				this.detailInfo=res.result.detailInfo;
 				//获取参数信息
 				this.goodsParamInfo=new GoodsParam(res.result.itemParams.info,res.result.itemParams.rule)
+				//获取评论
+				this.comment=new Comment(res.result.rate)
 			})
 		},
 		methods:{

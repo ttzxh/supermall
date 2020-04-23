@@ -45,3 +45,10 @@ export class GoodsParam{
 			this.size=rule.tables;
 	}
 }
+
+export class Comment{
+	constructor(rate) {
+	    this.list=rate.list;
+		
+	}
+}

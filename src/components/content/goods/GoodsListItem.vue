@@ -1,6 +1,6 @@
 <template>
 	<div class="goodsItem" @click="itemCli">
-		<img :src="goodsItem.show.img" alt="">
+		<img :src="goodsItem.show.img" alt="" @load="ImageLoad">
 		<div class="limit">
 			<p>{{goodsItem.title}}</p>
 			<span class="price">{{goodsItem.price}}</span>
@@ -30,6 +30,13 @@
 					
 			// 	}
 			// })
+		},
+		ImageLoad(){
+			if(!this.isLoad){
+				this.$emit('GoodsImageLoad')
+				this.isLoad=!this.isLoad
+				
+			}
 		}
 	}
 	}

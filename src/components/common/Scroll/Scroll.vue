@@ -1,6 +1,8 @@
 <template>
 	<div ref="wrapper">
-		<div class="content"><slot></slot></div>
+		<div class="content">
+			<slot></slot>
+			</div>
 		<!-- <position :position="position" ></position> -->
 		<!-- <back-top></back-top> -->
 	</div>

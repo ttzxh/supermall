@@ -11,7 +11,7 @@
 			<feature-view></feature-view>
 			<tab-control :titles="['流行','新款','精选']"
 			@tabClick="tabClick" ref="tabControl"></tab-control>
-			<goods-list :goods="showGoods"></goods-list>
+			<goods-list :goods="showGoods" @GoodsImageLoad="GoodsImageLoad"></goods-list>
 			
 		</scroll>
 		<!--         监听本地的事件 -->
@@ -98,10 +98,11 @@
 </template>
 
 <script>
+	import scroll from 'components/common/Scroll/Scroll.vue'
+	
 	import NavBar from 'components/common/navBar/navBar.vue'
 	import TabControl from 'components/content/tabControl/TabControl.vue'
 	import GoodsList from 'components/content/goods/GoodsList.vue'
-	import scroll from 'components/common/Scroll/Scroll.vue'
 	import BackTop from '../../components/common/back/Back.vue'
 	
   import HomeSwiper from './childComps/HomeSwiper.vue'
@@ -115,13 +116,13 @@
 	export default{
 		name:"Home",
 		components:{
+			scroll,
 			NavBar,
 			HomeSwiper,
 			HomeRecommendView,
 			FeatureView,
 			TabControl,
 			GoodsList,
-			scroll,
 			BackTop
 		},
 		computed:{
@@ -155,7 +156,8 @@
 			this.getHomeGoods('new')
 			this.getHomeGoods('sell')
 	},
-	mounted() {
+	beforeMount() {
+		
 		// this.$refs.scroll.scroll.on('scroll',(position)=>{
 		// 	console.log(position)
 		// 	this.position=position.y
@@ -203,6 +205,9 @@
 		swiperImageLoad(){
 this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 		},
+		GoodsImageLoad(){
+			this.$refs.scroll.scroll.refresh();
+		},
 
 		//网络请求相关方法
 		getHomeMutidata(){
@@ -235,13 +240,13 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 	},
 	contentPull(){
 		this.getHomeGoods(this.currentType)
-		setTimeout(()=>{
+		// setTimeout(()=>{
 			this.$refs.scroll.scroll.refresh();
-		},300)
+		// },300)
 		
 	},
 	exePullAndRefresh(){
-		debounce(this.contentPull,1000)()
+		debounce(this.contentPull,500)()
 	}
 
 	}
