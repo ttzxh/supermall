@@ -1,20 +1,25 @@
 <template>
-	<div class="comment" v-if="comment.list">
+	<div class="comment" v-if="comment.list||comment.list!='undefined'">
 		<span>宝贝评价({{index}})</span> 
 		<div class="seeTotal">查看全部</div>
-		<div v-for="(items,index) in comment.list" class="userAttr">
-			<img :src="items.user.avatar" alt="" class="userImg">
-			<div style="display: inline-block;">
-				<p class="userName">{{items.user.uname}}</p>
-				<p class="clotheStyle">{{comment.list[0].created | showDate}}  {{comment.list[0].style}}</p>
+		<div v-if="comment.list!=undefined">
+			<div v-for="(items,index) in comment.list" class="userAttr">
+					<img :src="items.user.avatar" alt="" class="userImg">
+					<div style="display: inline-block;">
+						<p class="userName">{{items.user.uname}}</p>
+						<p class="clotheStyle">{{comment.list[0].created | showDate}}  {{comment.list[0].style}}</p>
+					</div>
+				</div>
+			<div v-for="(items1,index1) in comment.list" class="userComment">
+				<span class="TotalComment">整体评价:</span><span class="describe">{{items1.content}}</span>
+			</div>
+			<div class="info-images" v-if="comment.list">
+				<img :src="items2" alt="" v-for="(items2,index2) in comment.list[0].images" :key="index2">
 			</div>
 		</div>
-	<div v-for="(items1,index1) in comment.list" class="userComment">
-		<span class="TotalComment">整体评价:</span><span class="describe">{{items1.content}}</span>
-	</div>
-	<div class="info-images" v-if="comment.list">
-		<img :src="items2" alt="" v-for="(items2,index2) in comment.list[0].images" :key="index2">
-	</div>
+		<div v-else class="noComment">
+			<span>暂时没有评价哦!!</span>
+		</div>
 	
 	</div>
 </template>
@@ -34,7 +39,11 @@
 			}
 		},
 		beforeUpdate() {
-			this.index=this.comment.list.length
+			console.log(this.comment.list)
+			if(this.comment.list){
+				this.index=this.comment.list.length
+			}
+			
 		},
 		filters:{
 			showDate(value){
@@ -103,5 +112,8 @@
 	.info-images img{
 		width: 60%;
 		/* text-align: center; */
+	}
+	.noComment{
+		margin-top: 20px;
 	}
 </style>

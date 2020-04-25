@@ -11,7 +11,7 @@
 			<feature-view></feature-view>
 			<tab-control :titles="['流行','新款','精选']"
 			@tabClick="tabClick" ref="tabControl"></tab-control>
-			<goods-list :goods="showGoods" @GoodsImageLoad="GoodsImageLoad"></goods-list>
+			<goods-list :goods="showGoods" @HomeGoodsImageLoad="GoodsImageLoad"></goods-list>
 			
 		</scroll>
 		<!--         监听本地的事件 -->
@@ -147,6 +147,9 @@
 			SaveY:0
 		}
 	},
+	mounted() {
+		
+	},
 	created() {
 		//请求多个数据              这个不是闭包 只是将res的引用给了data的result 使得result指向了返回的大量数据
 		//这个res该删还是要删的
@@ -186,10 +189,11 @@
 	},
 	//在页面存活的时候离开这个页面
 	deactivated() {
-		console.log('deactived')
+		
 		this.SaveY=this.$refs.scroll.scroll.y;
-		console.log(this.SaveY)
+		
 	},
+	
 	methods:{
 		//事件监听相关方法
 		tabClick(index){
@@ -205,9 +209,7 @@
 		swiperImageLoad(){
 this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 		},
-		GoodsImageLoad(){
-			this.$refs.scroll.scroll.refresh();
-		},
+	
 
 		//网络请求相关方法
 		getHomeMutidata(){
@@ -244,6 +246,10 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 			this.$refs.scroll.scroll.refresh();
 		// },300)
 		
+	},
+	GoodsImageLoad(){
+		console.log('mmm')
+		this.$refs.scroll.scroll.refresh();
 	},
 	exePullAndRefresh(){
 		debounce(this.contentPull,500)()

@@ -7,7 +7,8 @@
 				
 			</div>
 			<div slot="center" class="DetailNavBar">
-				<div v-for="(items,index) in titles" class="DetailNavBarTitles" :class="{active1:index===currentIndex}"
+				<div v-for="(items,index) in titles" class="DetailNavBarTitles" 
+				:class="{active1:index===currentIndex}"
 				@click="DetailNavBarCli(index)">{{items}}</div>
 			</div>
 			</nav-bar>
@@ -18,6 +19,7 @@
 	import NavBar from 'components/common/navBar/navBar.vue'
 	export default{
 		name:"DetailNavBar",
+		
 		components:{
 			NavBar
 		},
@@ -29,10 +31,12 @@
 		},
 		methods:{
 			DetailNavBarCli(index){
-				this.currentIndex=index
-				
+				this.currentIndex=index;
+				this.$emit('titleClick',index)
+				  
 				
 			},
+			
 			BackCli(){
 				// this.$router.push('/home');
 				this.$router.back()

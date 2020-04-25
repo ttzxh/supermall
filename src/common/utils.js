@@ -1,4 +1,4 @@
-export function debounce(func,delay){
+export function debounce(func,delay=100){
 	//防抖函数 如果函数在delay时间内调用很多次 也只会执行一次
 			let timer=null
 			return function(...args){
@@ -7,6 +7,19 @@ export function debounce(func,delay){
 					func()
 				},delay)
 			}
+		}
+		
+export function debounce1(func,delay=5000){
+			
+					let timer=null
+					return function(...args){
+						if(timer) return;
+						timer=setTimeout(()=>{
+							func(this,args)
+							timer=null;
+						},delay)
+						
+					}
 		}
 		
 export function formatDate(date, fmt) {

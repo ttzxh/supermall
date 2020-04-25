@@ -1,6 +1,6 @@
 <template>
 	<div class="goodsItem" @click="itemCli">
-		<img :src="goodsItem.show.img" alt="" @load="ImageLoad">
+		<img :src="showImage" alt=""  @load="ImageLoad">
 		<div class="limit">
 			<p>{{goodsItem.title}}</p>
 			<span class="price">{{goodsItem.price}}</span>
@@ -20,6 +20,16 @@
 			}
 		}
 	},
+	data(){
+		return{
+			product:0
+		}
+	},
+	computed:{
+		showImage(){
+			return this.goodsItem.image || this.goodsItem.show.img;
+		}
+	},
 	methods:{
 		itemCli(){
 			// console.log('跳转')
@@ -31,12 +41,24 @@
 			// 	}
 			// })
 		},
+		//这里有一个Bug
 		ImageLoad(){
-			if(!this.isLoad){
-				this.$emit('GoodsImageLoad')
-				this.isLoad=!this.isLoad
+			if(this.$route.path.includes('/home'))
+			{
 				
+				if(!this.isLoad){
+					this.$emit('HomeGoodsImageLoad')
+					this.isLoad=!this.isLoad
+					
+				}
+			}else if(this.$route.path.includes('/detail')){
+				if(!this.isLoad){
+					this.$emit('DetailGoodsImageLoad')
+					this.isLoad=!this.isLoad
+					
+				}
 			}
+			
 		}
 	}
 	}
