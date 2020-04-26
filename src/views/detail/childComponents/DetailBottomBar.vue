@@ -4,11 +4,11 @@
 			<div class="store"><div class="storeImage"></div>店铺</div>
 			<div class="whiter"><div class="whiteImage"></div>客服</div>
 			<div class="collection" @click="showCollection">
-				<div :class="{collectionImage:isActive,collectionImageBright:!isActive}"></div>
+				<div :class="{collectionImage:!isActive,collectionImageBright:isActive}"></div>
 				收藏</div>
 		</div>
 		<div class="bottomBarright">
-			<div class="cart">加入购物车</div>
+			<div class="cart" @click="addToCart">加入购物车</div>
 			<div class="buyNow">立即购买</div>
 		</div>
 	</div>
@@ -25,6 +25,9 @@
 		methods:{
 			showCollection(){
 				return this.isActive=!this.isActive
+			},
+			addToCart(){
+				this.$emit('addCart')
 			}
 		}
 	}
@@ -93,6 +96,7 @@
 		display: inline-flex;
 		width: 65%;
 		vertical-align: top;
+		font-weight: 700;
 		/* background-color: cyan; */
 	}
 	.bottomBarright div{

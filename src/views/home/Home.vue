@@ -17,83 +17,7 @@
 		<!--         监听本地的事件 -->
 		<back-top @click.native="backClick" class="backtop" v-show="isShowBackTop" ></back-top>
 		
-		<ul>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-			<li>1加</li>
-			<li>2加</li>
-			<li>3加</li>
-			<li>4加</li>
-			<li>5加</li>
-		</ul>
+	
 	</div>
 </template>
 
@@ -113,6 +37,7 @@
 	
 	import {getHomeMutidata,getHomeGoods} from 'network/home'
 	import {debounce} from 'common/utils.js'
+	import {backTopMixin} from '../../common/Mixin.js'
 	export default{
 		name:"Home",
 		components:{
@@ -123,13 +48,14 @@
 			FeatureView,
 			TabControl,
 			GoodsList,
-			BackTop
+			
 		},
 		computed:{
 			showGoods(){
 				return this.goods[this.currentType].list
 			}
 		},
+		mixins:[backTopMixin],
 	data(){
 		return{
 			banners:[],
@@ -140,7 +66,7 @@
 				'sell':{page:0,list:[]}
 			},
 			currentType:'pop',
-			isShowBackTop:false,
+			
 			tabOffsetTop:0,
 			isTabFix:false,
 			isTabShow:false,
@@ -228,14 +154,12 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 				this.$refs.scroll.finishPullUp()
 			})
 		},
-		backClick(){
-			// 拿到Scroll组件
-			this.$refs.scroll.scrollTo(0,0,500)
-		},
+		
   contentScroll(position){
 		
 		//判断 回到顶部 是否显示
-		position.y>-1000?this.isShowBackTop=false:this.isShowBackTop=true,
+		position.y>-1000?this.isShowBackTop=false:this.isShowBackTop=true;
+		
 		//决定tabControl是否吸顶（position fix）
 		this.isTabFix=(-position.y)>this.tabOffsetTop-44
 		this.isTabShow=(-position.y)>this.tabOffsetTop-44

@@ -11,7 +11,9 @@
 			<div class="commend"><div class="WyCommend">我的推荐>></div></div>
 			<goods-list :goods="commend" @DetailGoodsImageLoad="imageLoad"></goods-list>
 		</scroll>
-		<detail-bottom-bar></detail-bottom-bar>
+		<back-top class="DetailBackTop"  v-show="isShowBackTop" @click.native="backClick"></back-top>
+		<detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
+		
 	</div>
 </template>
 
@@ -26,10 +28,12 @@
 	import DetailComment from './childComponents/DetailComment.vue'
 	import GoodsList from '../../components/content/goods/GoodsList.vue'
 	import DetailBottomBar from './childComponents/DetailBottomBar.vue'
+	import BackTop from '../../components/common/back/Back.vue'
 	
 	import {getDetail,Goods,Shop,GoodsParam,Comment,getCommend} from '../../network/detail.js'
 	
 	import {debounce,debounce1} from '../../common/utils.js'
+	import {backTopMixin} from '../../common/Mixin.js'
 
 	export default{
 		name:"detail",
@@ -44,8 +48,9 @@
 			DetailComment,
 			GoodsList,
 			DetailBottomBar
-			
+		
 		},
+		mixins:[backTopMixin],
 		data(){
 			return{
 				iid:null,
@@ -57,11 +62,12 @@
 				goodsParamInfo:{},
 				comment:{},
 				commend:[],
-				themetTopsY:[],
+				themetTopsY:[],//里面是商品 评论 推荐 参数对应的offsetTop
 				getThemeTopY:null,
 				ScrollIndex:0,
 				currentIndex:0,
 			detailLoad:false
+			
 			}
 		},
 		created() {
@@ -147,6 +153,18 @@
 				
 				this.$refs.scroll.scrollTo(0,-this.themetTopsY[index],300)
 			},
+			addToCart(){
+				//获取商品信息
+				const product={}
+				product.image=this.topImages[0];
+			  product.title=this.goods.title;
+				product.desc=this.goods.desc;
+			  product.price=this.goods.LowPrice;
+				product.iid=this.iid;
+				product.count=1;
+				//将商品添加到购物车中
+				this.$store.dispatch('addCart',product)
+			},
 			contentScroll(position){
 				
 				// switch(position.y){
@@ -155,6 +173,7 @@
 				// 	case -this.themetTopsY[2]:this.ScrollIndex=2;break;
 				// 	case -this.themetTopsY[3]:this.ScrollIndex=3;break;
 				// }
+			//屏幕滚动到指定位置时改变顶部导航的样式
 				const positionY=-position.y
 				let length=this.themetTopsY.length
 				for(let i =0;i<length;i++){
@@ -167,6 +186,9 @@
 					}
 					
 				}
+				
+				//回到顶部
+					position.y>-1000?this.isShowBackTop=false:this.isShowBackTop=true;
 			}
 		}
 	}
@@ -200,5 +222,9 @@
 		text-align: center;
 		line-height: 20px;
 		box-shadow: 2px 3px 2px 0 rgba(0,0,0,.3);
+	}
+	.DetailBackTop{
+		margin-bottom: 50px;
+		margin-left: 10px;
 	}
 </style>
