@@ -176,7 +176,7 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 		this.$refs.scroll.scroll.refresh();
 	},
 	exePullAndRefresh(){
-		debounce(this.contentPull,500)()
+		debounce(this.contentPull,200)()
 	}
 
 	}

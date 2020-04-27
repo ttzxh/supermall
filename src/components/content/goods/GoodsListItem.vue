@@ -71,15 +71,14 @@
 	}
 	.goodsItem{
 		padding: 5px;
-	
-	
 		display: inline-block;
 		width: 50%;
-		height: 280px;
+		height: 30%;
 		font-size: 12px;
 		text-align: center;
 		/* background-color: red; */
-		vertical-align: text-bottom;
+		/* 以图片为主 */
+		vertical-align: top;
 		
 	}
 	.price{
