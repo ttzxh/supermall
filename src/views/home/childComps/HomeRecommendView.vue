@@ -1,6 +1,6 @@
 <template>
 	<div class="TT">
-		<div v-for="item in recommends">
+		<div v-for="item in recommends" class="Recommend">
 			<a :href="item.link">
 				<img :src="item.image" alt="">
 				<div>{{item.title}}</div>
@@ -35,6 +35,9 @@
 		font-size: 12px;
 		padding-bottom: 20px;
 		border-bottom: 20px solid #F2F2F2;
+	}
+	.Recommend{
+		flex: 1;
 	}
 	.TT img{
 		

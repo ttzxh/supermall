@@ -53,14 +53,14 @@
 		/* margin-left: 5px; */
 		height: 60%;
 		background-image: url(../../../assets/img/detail/detail_bottom.png);
-		background-position: 7px 81%;
+		background-position: 7px 79%;
 		background-size:59%;
 		background-repeat: no-repeat;
 	}
 	.whiteImage{
 		height: 60%;
 		background-image: url(../../../assets/img/detail/detail_bottom.png);
-		background-position: 7px 43%;
+		background-position: 7px 42%;
 		background-size:60%;
 		background-repeat: no-repeat;
 	}

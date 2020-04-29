@@ -1,42 +1,35 @@
 <template>
   <div>
-		<h2>分类</h2>
-		<back-top  @click.native="backClick" v-show="isShowBackTop"></back-top>
-		<scroll class="content" ref="scroll" @scroll="contentScrol2" :probeType="3">
-			
-		</scroll>
+		<nav-bar class="categoryLeftNavBar"><div slot="center">分类</div></nav-bar>
+		<category-left-nav></category-left-nav>
+     <category-right-nav></category-right-nav>
 	</div>
  </template>
 
 <script>
-	import Scroll from '../../components/common/Scroll/Scroll.vue'
-	import BackTop from '../../components/common/back/Back.vue'
-	import {backTopMixin} from '../../common/Mixin.js'
+	import categoryLeftNav from './childcategoryComp/categoryLeftNav.vue'
+	import NavBar from '../../components/common/navBar/navBar.vue'
+	import categoryRightNav from './childcategoryComp/categoryRightNav.vue'
 	 
-	export default{
+	export default{ 
 		name:'category',
 		components:{
-			Scroll
+			categoryLeftNav,
+			NavBar,
+			categoryRightNav
 		},
 		data(){
 			return {
 			
 			}
-		},
-		mixins:[backTopMixin],
-		methods:{
-			btn(){
-				console.log('1234')
-			}
-		},
-		methods:{
-			contentScrol2(){
-				
-			}
 		}
 	}
 </script>
 
-<style>
-	
+<style scoped="scoped">
+	.categoryLeftNavBar{
+		background-color: #ff5700;
+		color: white;
+		font-weight: 700;
+	}
 </style>

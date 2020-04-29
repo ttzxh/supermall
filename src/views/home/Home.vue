@@ -102,16 +102,12 @@
 		// },500)
         
 	},
-	destroyed() {
-		console.log('homeDestroy')
-		
-	},
+	
 	//在页面存活的时候进入这个页面
 	activated() {
-		console.log('active')
-		console.log(this.SaveY)
-		this.$refs.scroll.scrollTo(0,this.SaveY)
 		this.$refs.scroll.scroll.refresh()
+		this.$refs.scroll.scrollTo(0,this.SaveY,0)
+		
 	},
 	//在页面存活的时候离开这个页面
 	deactivated() {
@@ -140,6 +136,7 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 		//网络请求相关方法
 		getHomeMutidata(){
 			getHomeMutidata().then(res=>{
+				console.log(res)
 				this.banners=res.data.banner.list
 				this.recommends=res.data.recommend.list
 				})
@@ -147,6 +144,7 @@ this.tabOffsetTop=this.$refs.tabControl.$el.offsetTop;
 		getHomeGoods(type){
 			const page=this.goods[type].page+1
 			getHomeGoods(type,page).then(res=>{
+				console.log(res)
 				//res是pop的前30条数据
 				this.goods[type].list.push(...res.data.list)
 				this.goods[type].page+=1;

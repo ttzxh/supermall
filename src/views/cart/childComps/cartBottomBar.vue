@@ -10,7 +10,7 @@
 			<span>合计:</span><span>{{TotalPrice}}</span>
 		</div>
 		<div class="cartBottomBarRight">
-			<span>立即结算({{checkLength}})</span>
+			<span @click="calcClic">立即结算({{checkLength}})</span>
 		</div>
 	</div>
 	
@@ -44,6 +44,14 @@
 				 this.isTotalChange=true
 			 }
 				
+			},
+			calcClic(){
+				let IfAllcheck=this.$store.state.cartList.every(function(item){
+								return item.check==false;
+				})
+				if(IfAllcheck){
+					this.$toast.show('请选择要购买的商品',2000)
+				}
 			}
 		},
 		
